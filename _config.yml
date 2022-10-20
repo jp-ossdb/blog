@@ -3,30 +3,34 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Title (display)
-title: Japan CSS Support Example Blog
+title: Japan CSS Support - PaaS OSS Database Blog
 # Sub Title (display)
-subtitle: Japan CSS Support Example Blog
+subtitle: 日本マイクロソフト Azure OSS Database サポート情報ブログ
 # Description
-description: Japan CSS Support Example Blog
+description: 日本マイクロソフト Azure Database for PostgreSQL / MySQL / MariaDB に関するサポート情報のブログです
 
 # Keywords
 keywords:
-  - Information
-  - Example
+  - Azure DB
+  - Azure PostgreSQL
+  - Azure MySQL
+  - Azure MariaDB
 
-author: CSS Japan
+author: Azure PaaS OSS Database Support Japan
 
 # Tag (hexo helper)
 root_tag_generator:
   root_tag_names:
-    - Information
+    - PostgreSQL
+    - MySQL
+    - MariaDB
   sub_tag_limit: 20
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://cssjpn.github.io/blog/
+url: https://jp-ossdb.github.io/blog/
 github:
-  url: https://github.com/cssjpn/blog-example/
+  url: https://github.com/jp-ossdb/blog/
   posts_dir: articles
   default_branch: main
 
@@ -35,13 +39,13 @@ skip_render:
   # Bing Webmaster
   - 'BingSiteAuth.xml'
   # Search Console
-  # - 'googlec1234567890abcde.html'
+   - 'google4ac4cd09c454aa91c.html'
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:cssjpn/blog-example.git
+  repo: git@github.com:jp-ossdb/blog.git
   branch: gh-pages
   message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }} [skip ci]"
 
