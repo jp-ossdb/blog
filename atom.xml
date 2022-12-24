@@ -6,7 +6,7 @@
   <link href="https://jp-ossdb.github.io/blog/atom.xml" rel="self"/>
   
   <link href="https://jp-ossdb.github.io/blog/"/>
-  <updated>2022-12-09T09:35:43.229Z</updated>
+  <updated>2022-12-24T09:45:27.370Z</updated>
   <id>https://jp-ossdb.github.io/blog/</id>
   
   <author>
@@ -17,11 +17,33 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>An existing connection forcibly closed by the remote host について</title>
+    <link href="https://jp-ossdb.github.io/blog/postgres-single/troubleshoot-postgresql-an-existing-connection-was-forcibly/"/>
+    <id>https://jp-ossdb.github.io/blog/postgres-single/troubleshoot-postgresql-an-existing-connection-was-forcibly/</id>
+    <published>2022-12-24T03:00:00.000Z</published>
+    <updated>2022-12-24T09:45:27.370Z</updated>
+    
+    <content type="html"><![CDATA[<p>※本記事は <a href="https://techcommunity.microsoft.com/t5/azure-database-for-postgresql/troubleshoot-postgresql-an-existing-connection-was-forcibly/ba-p/925164">Troubleshoot PostgreSQL: ‘An existing connection was forcibly closed by the remote host’</a> の抄訳となります。</p><p>PostgreSQLのログに “could not receive data from client. “のようなエラーが表示された後、すぐに次のようなエラーが発生します。</p><blockquote><p>‘An existing connection was forcibly closed by the remote host’ </p></blockquote><p>この2つのエラーは相互に関連しており、クライアント側の接続処理の問題と関連していることがよくあります。</p><p>このようなタイプのエラーは、さまざまなコンポーネントが関与しているため、残念ながらトラブルシューティングが難しい場合があります。<br>このブログ記事では、このエラーが発生する原因と、それを回避するためのベストプラクティスについて説明します。</p><h2 id="既に無効になった接続"><a href="#既に無効になった接続" class="headerlink" title="既に無効になった接続"></a>既に無効になった接続</h2><p>クライアントアプリケーションが、コネクションプールから取得した接続を使用してクエリを実行しようとした場合を考えます。アプリケーションでその接続オブジェクトを使用しようとすると、接続が古くなっており既に無効になっていた場合、クライアントアプリケーションは開いている接続を介してクエリーデータを送信しようとし、例外が発生します。 クライアント側のアプリケーションが例外を捕捉し、TCP 接続が閉じられます。PostgreSQL サーバーはクライアント側の接続が閉じられたことを検出し、以下のようなエラーが返されます。</p><blockquote><p>WSAECONNRESET (10054) Connection reset by peer: An existing connection was forcibly closed by the remote host.<br>ここでいう「remote host(リモートホスト)」とは、Postgresサーバーではなくクライアントのことです。</p></blockquote><h3 id="詳細について"><a href="#詳細について" class="headerlink" title="詳細について"></a>詳細について</h3><p>何が問題を引き起こしているかを正確に理解するためには、問題が発生したときにクライアント側でネットワークトレースをキャプチャすることが有効です。ネットワークトレースは、NetMon、WireShark、Fiddlerなどの様々なアプリケーションでキャプチャすることができます。</p><p>Linuxクライアントを使用していて、上記のツールが動作しない場合、以下のコマンドのように手動でネットワークダンプを生成することができます。</p><blockquote><p>tshark -i any -n -b filesize:204800 -w <code>date +%y%m%d-%H:%M:%S</code>.pcap -b files:1000</p></blockquote><p>または</p><blockquote><p>tcpdump -i any -w <code>date +%y%m%d-%H:%M:%S</code>.pcap -G 300 -W 1000</p></blockquote><p>注：ネットワークキャプチャを有効にした場合、ディスク容量を監視し、容量不足にならないように必要に応じてファイルを削除してください。</p><h2 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h2><ul><li><p>Pgbouncerの使用<br>pgBouncerは、アプリケーションとデータベースの間に位置するコネクションプーラーです。データベースへの新しい接続が必要な場合、アプリケーションはコネクションプールから接続を取得し、それを再利用し続けます。一定の時間が経過すると、接続は解放されます。つまり、アプリケーションがデータベースへの接続を取得した後、一定時間以上使用しない場合、実際にはアイドル接続として扱われ、再利用されるため新たな接続が消費されません。<br>詳細については、以下でもご説明していますのでご参照ください<br><a href="https://techcommunity.microsoft.com/t5/azure-database-for-postgresql/not-all-postgres-connection-pooling-is-equal/ba-p/825717">Not all Postgres connection pooling is equal</a></p></li><li><p>過渡的なエラーを処理するために再試行ロジックを実装する<br>クラウド上でアプリケーションを設計・開発する場合、一過性のエラーが発生する可能性があるため、ベストプラクティスとしてリトライロジックを実装します。この場合、クライアントクエリを再試行することで、使用可能な接続を見つけることができます。詳しくはこちらをご覧ください。<br><a href="https://learn.microsoft.com/ja-jp/azure/postgresql/single-server/concepts-connectivity">Azure Database for PostgreSQL - Singlser Server の一時的な接続エラーに対処する</a></p></li><li><p>アイドル状態の接続を最小限にする<br>接続の管理は、PostgreSQLのユーザとの会話でよく出てくる話題です。PostgreSQLの接続はコストがかかります。アイドルでもアクティブでも、それぞれの接続は一定のメモリを消費します（1接続あたり10MB程度）。アイドル状態の接続とは、アプリケーションから接続を取得し、それを使用しないまま保持するものです。アプリケーションのコネクションプーラも、1つまたは複数のアイドル接続を消費することがあります。詳細については、以下を参照してください。<br><a href="https://techcommunity.microsoft.com/t5/azure-database-for-postgresql/connection-handling-best-practice-with-postgresql/ba-p/790883">Connection handling best practice with PostgreSQL</a></p></li></ul><p>statement_timeout と idle_in_transaction_session_timeout を適切に設定する方法については、以下を参照してください。<br><a href="https://www.craigkerstiens.com/2017/09/18/postgres-connection-management/">Tracking and Managing Your Postgres Connection</a></p><ul><li><p>アプリケーションからKeep-alive を送信する<br>接続が一定時間アクティブでない状況で、プールされた接続がアイドルのためタイムアウトしないようにすることができます。</p></li><li><p>アプリケーションのリソース使用率をチェックする<br>クライアント側でリソースの負荷が高い（CPUが高い、IOPSが高い、コンテキストスイッチが高い）と、速度が低下することがあります。この遅れにより、接続が長時間にわたって開かれ、最終的に接続が切断される可能性があります。</p></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;※本記事は &lt;a href=&quot;https://techcommunity.microsoft.com/t5/azure-database-for-postgresql/troubleshoot-postgresql-an-existing-connection-was-fo</summary>
+      
+    
+    
+    
+    
+    <category term="PostgreSQL" scheme="https://jp-ossdb.github.io/blog/tags/PostgreSQL/"/>
+    
+  </entry>
+  
+  <entry>
     <title>サンプル記事 - PostgreSQL シングルサーバー</title>
     <link href="https://jp-ossdb.github.io/blog/postgres-single/sample-post/"/>
     <id>https://jp-ossdb.github.io/blog/postgres-single/sample-post/</id>
     <published>2022-11-21T03:00:00.000Z</published>
-    <updated>2022-12-09T09:35:43.229Z</updated>
+    <updated>2022-12-24T09:45:27.370Z</updated>
     
     <content type="html"><![CDATA[<p>記事概要 PostgreSQL に関する記事</p><span id="more"></span><p>記事本文 PostgreSQL に関する記事内容</p><!-- 文字修飾 --><p><strong>太字</strong></p><p><del>訂正せん</del></p><p><em>斜め文字</em></p><!-- 引用 --><blockquote><p>引用</p><blockquote><p>引用</p></blockquote></blockquote><!-- 見出し --><h2 id="見出し-大"><a href="#見出し-大" class="headerlink" title="見出し (大)"></a>見出し (大)</h2><h3 id="見出し-中"><a href="#見出し-中" class="headerlink" title="見出し (中)"></a>見出し (中)</h3><h4 id="見出し-小"><a href="#見出し-小" class="headerlink" title="見出し (小)"></a>見出し (小)</h4><!-- リスト --><ul><li>リスト<ul><li>リスト</li><li>リスト</li></ul></li><li>リスト</li></ul><!-- 数字リスト --><ol><li>数字リスト<ol><li>数字リスト</li><li>数字リスト</li></ol></li><li>数字リスト</li><li>数字リスト</li></ol><!-- 区切り線 --><hr><!-- リンク --><p><a href="https://jpaztech.github.io/blog/">Japan Azure IaaS Core Support Blog</a></p><!-- 画像 (リポジトリ内ファイルを参照 --><p><img src="./example/example01.png"></p><!-- 画像 (外部 URL を参照) --><p><img src="https://jpaztech.github.io/blog/vm/re-install-windows-azure-guest-agent/service.png"></p><!-- コード ブロック --><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> stop rdagent</span><br><span class="line"><span class="built_in">net</span> stop WindowsAzureGuestAgent</span><br><span class="line"><span class="built_in">net</span> stop WindowsAzureTelemetryService</span><br></pre></td></tr></table></figure><!-- 表 --><table><thead><tr><th>見出し</th><th>見出し</th></tr></thead><tbody><tr><td>セル</td><td>セル</td></tr><tr><td>セル</td><td>セル</td></tr></tbody></table><!-- ノート --><div class="alert is-info"><p class="alert-title">Note</p><p>THIS IS NOTE</p><p><code>[!NOTE]</code> と書くと <code>Note</code> になります。</p><p>これだけ MS 公式ドキュメントと異なります。 (公式ドキュメントだと <code>NOTE</code> も <code>注意</code> に変換される…)</p></div><!-- ヒント --><div class="alert is-success"><p class="alert-title">ヒント</p><p>THIS IS TIP</p><p><code>[!TIP]</code> とかくと <code>ヒント</code> になります。</p></div><!-- 重要 --><div class="alert is-important"><p class="alert-title">重要</p><p>THIS IS IMPORTANT</p><p><code>[!IMPORTANT]</code> とかくと <code>重要</code> になります。</p></div><!-- 注意事項 --><blockquote><p>[!CAUTION]<br>THIS IS CAUTION<br><code>[!CAUTION]</code> と書くと <code>注意事項</code> になります。</p></blockquote><!-- 注意 --><div class="alert is-warning"><p class="alert-title">警告</p><p>THIS IS WARNING</p><p><code>[!WARNING]</code> と書くと <code>警告</code> になります。</p></div>]]></content>
     
@@ -42,7 +64,7 @@
     <link href="https://jp-ossdb.github.io/blog/information/example/"/>
     <id>https://jp-ossdb.github.io/blog/information/example/</id>
     <published>2021-01-01T03:00:00.000Z</published>
-    <updated>2022-12-09T09:35:43.229Z</updated>
+    <updated>2022-12-24T09:45:27.370Z</updated>
     
     <content type="html"><![CDATA[<p>記事概要</p><span id="more"></span><p>記事本文</p><!-- 文字修飾 --><p><strong>太字</strong></p><p><del>訂正せん</del></p><p><em>斜め文字</em></p><!-- 引用 --><blockquote><p>引用</p><blockquote><p>引用</p></blockquote></blockquote><!-- 見出し --><h2 id="見出し-大"><a href="#見出し-大" class="headerlink" title="見出し (大)"></a>見出し (大)</h2><h3 id="見出し-中"><a href="#見出し-中" class="headerlink" title="見出し (中)"></a>見出し (中)</h3><h4 id="見出し-小"><a href="#見出し-小" class="headerlink" title="見出し (小)"></a>見出し (小)</h4><!-- リスト --><ul><li>リスト<ul><li>リスト</li><li>リスト</li></ul></li><li>リスト</li></ul><!-- 数字リスト --><ol><li>数字リスト<ol><li>数字リスト</li><li>数字リスト</li></ol></li><li>数字リスト</li><li>数字リスト</li></ol><!-- 区切り線 --><hr><!-- リンク --><p><a href="https://jpaztech.github.io/blog/">Japan Azure IaaS Core Support Blog</a></p><!-- 画像 (リポジトリ内ファイルを参照 --><p><img src="/blog/information/example/example01.png"></p><!-- 画像 (外部 URL を参照) --><p><img src="https://jpaztech.github.io/blog/vm/re-install-windows-azure-guest-agent/service.png"></p><!-- コード ブロック --><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> stop rdagent</span><br><span class="line"><span class="built_in">net</span> stop WindowsAzureGuestAgent</span><br><span class="line"><span class="built_in">net</span> stop WindowsAzureTelemetryService</span><br></pre></td></tr></table></figure><!-- 表 --><table><thead><tr><th>見出し</th><th>見出し</th></tr></thead><tbody><tr><td>セル</td><td>セル</td></tr><tr><td>セル</td><td>セル</td></tr></tbody></table><!-- ノート --><div class="alert is-info"><p class="alert-title">Note</p><p>THIS IS NOTE</p><p><code>[!NOTE]</code> と書くと <code>Note</code> になります。</p><p>これだけ MS 公式ドキュメントと異なります。 (公式ドキュメントだと <code>NOTE</code> も <code>注意</code> に変換される…)</p></div><!-- ヒント --><div class="alert is-success"><p class="alert-title">ヒント</p><p>THIS IS TIP</p><p><code>[!TIP]</code> とかくと <code>ヒント</code> になります。</p></div><!-- 重要 --><div class="alert is-important"><p class="alert-title">重要</p><p>THIS IS IMPORTANT</p><p><code>[!IMPORTANT]</code> とかくと <code>重要</code> になります。</p></div><!-- 注意事項 --><blockquote><p>[!CAUTION]<br>THIS IS CAUTION<br><code>[!CAUTION]</code> と書くと <code>注意事項</code> になります。</p></blockquote><!-- 注意 --><div class="alert is-warning"><p class="alert-title">警告</p><p>THIS IS WARNING</p><p><code>[!WARNING]</code> と書くと <code>警告</code> になります。</p></div>]]></content>
     
@@ -63,7 +85,7 @@
     <link href="https://jp-ossdb.github.io/blog/information/test/"/>
     <id>https://jp-ossdb.github.io/blog/information/test/</id>
     <published>2020-12-21T06:00:00.000Z</published>
-    <updated>2022-12-09T09:35:43.229Z</updated>
+    <updated>2022-12-24T09:45:27.370Z</updated>
     
     <content type="html"><![CDATA[<p>hello, world!</p>]]></content>
     

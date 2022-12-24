@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>An existing connection forcibly closed by the remote host について | Japan CSS Support - PaaS OSS Database Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="※本記事は Troubleshoot PostgreSQL: ‘An existing connection was forcibly closed by the remote host’ の抄訳となります。 PostgreSQLのログに “could not receive data from client. “のようなエラーが表示された後、すぐに次のようなエラーが発生します。  ‘An exi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="An existing connection forcibly closed by the remote host について">
+<meta property="og:url" content="https://jp-ossdb.github.io/blog/postgres-single/troubleshoot-postgresql-an-existing-connection-was-forcibly/index.html">
+<meta property="og:site_name" content="Japan CSS Support - PaaS OSS Database Blog">
+<meta property="og:description" content="※本記事は Troubleshoot PostgreSQL: ‘An existing connection was forcibly closed by the remote host’ の抄訳となります。 PostgreSQLのログに “could not receive data from client. “のようなエラーが表示された後、すぐに次のようなエラーが発生します。  ‘An exi">
+<meta property="og:locale" content="ja_JP">
+<meta property="article:published_time" content="2022-12-24T03:00:00.000Z">
+<meta property="article:modified_time" content="2022-12-24T09:45:27.370Z">
+<meta property="article:author" content="Azure PaaS OSS Database Support Japan">
+<meta property="article:tag" content="PostgreSQL">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan CSS Support - PaaS OSS Database Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jp-ossdb.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan CSS Support - PaaS OSS Database Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフト Azure Database for PostgreSQL / MySQL / MariaDB サポート情報ブログ</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-postgres-single/troubleshoot-postgresql-an-existing-connection-was-forcibly" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      An existing connection forcibly closed by the remote host について
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2022-12-24T03:00:00.000Z" itemprop="datePublished">2022-12-24</time>
+</a>
+        
+        
+        <a href="https://github.com/jp-ossdb/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+8922b3dc-250e-556e-b3fc-8de87cc28eae%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAn+existing+connection+forcibly+closed+by+the+remote+host+%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjp-ossdb.github.io%2Fblog%2Fpostgres-single%2Ftroubleshoot-postgresql-an-existing-connection-was-forcibly%2F%29%0A*+Content+Source%3A+%5Barticles%2Fpostgres-single%2Ftroubleshoot-postgresql-an-existing-connection-was-forcibly.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-ossdb%2Fblog%2Fblob%2Fmain%2Farticles%2Fpostgres-single%2Ftroubleshoot-postgresql-an-existing-connection-was-forcibly.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jp-ossdb.github.io/blog/postgres-single/troubleshoot-postgresql-an-existing-connection-was-forcibly/" data-id="clc1rac2600040mo3g2ui7yil" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>※本記事は <a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/t5/azure-database-for-postgresql/troubleshoot-postgresql-an-existing-connection-was-forcibly/ba-p/925164">Troubleshoot PostgreSQL: ‘An existing connection was forcibly closed by the remote host’</a> の抄訳となります。</p>
+<p>PostgreSQLのログに “could not receive data from client. “のようなエラーが表示された後、すぐに次のようなエラーが発生します。</p>
+<blockquote>
+<p>‘An existing connection was forcibly closed by the remote host’ </p>
+</blockquote>
+<p>この2つのエラーは相互に関連しており、クライアント側の接続処理の問題と関連していることがよくあります。</p>
+<p>このようなタイプのエラーは、さまざまなコンポーネントが関与しているため、残念ながらトラブルシューティングが難しい場合があります。<br>このブログ記事では、このエラーが発生する原因と、それを回避するためのベストプラクティスについて説明します。</p>
+<h2 id="既に無効になった接続"><a href="#既に無効になった接続" class="headerlink" title="既に無効になった接続"></a>既に無効になった接続</h2><p>クライアントアプリケーションが、コネクションプールから取得した接続を使用してクエリを実行しようとした場合を考えます。アプリケーションでその接続オブジェクトを使用しようとすると、接続が古くなっており既に無効になっていた場合、クライアントアプリケーションは開いている接続を介してクエリーデータを送信しようとし、例外が発生します。 クライアント側のアプリケーションが例外を捕捉し、TCP 接続が閉じられます。PostgreSQL サーバーはクライアント側の接続が閉じられたことを検出し、以下のようなエラーが返されます。</p>
+<blockquote>
+<p>WSAECONNRESET (10054) Connection reset by peer: An existing connection was forcibly closed by the remote host.<br>ここでいう「remote host(リモートホスト)」とは、Postgresサーバーではなくクライアントのことです。</p>
+</blockquote>
+<h3 id="詳細について"><a href="#詳細について" class="headerlink" title="詳細について"></a>詳細について</h3><p>何が問題を引き起こしているかを正確に理解するためには、問題が発生したときにクライアント側でネットワークトレースをキャプチャすることが有効です。ネットワークトレースは、NetMon、WireShark、Fiddlerなどの様々なアプリケーションでキャプチャすることができます。</p>
+<p>Linuxクライアントを使用していて、上記のツールが動作しない場合、以下のコマンドのように手動でネットワークダンプを生成することができます。</p>
+<blockquote>
+<p>tshark -i any -n -b filesize:204800 -w <code>date +%y%m%d-%H:%M:%S</code>.pcap -b files:1000</p>
+</blockquote>
+<p>または</p>
+<blockquote>
+<p>tcpdump -i any -w <code>date +%y%m%d-%H:%M:%S</code>.pcap -G 300 -W 1000</p>
+</blockquote>
+<p>注：ネットワークキャプチャを有効にした場合、ディスク容量を監視し、容量不足にならないように必要に応じてファイルを削除してください。</p>
+<h2 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h2><ul>
+<li><p>Pgbouncerの使用<br>pgBouncerは、アプリケーションとデータベースの間に位置するコネクションプーラーです。データベースへの新しい接続が必要な場合、アプリケーションはコネクションプールから接続を取得し、それを再利用し続けます。一定の時間が経過すると、接続は解放されます。つまり、アプリケーションがデータベースへの接続を取得した後、一定時間以上使用しない場合、実際にはアイドル接続として扱われ、再利用されるため新たな接続が消費されません。<br>詳細については、以下でもご説明していますのでご参照ください<br><a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/t5/azure-database-for-postgresql/not-all-postgres-connection-pooling-is-equal/ba-p/825717">Not all Postgres connection pooling is equal</a></p>
+</li>
+<li><p>過渡的なエラーを処理するために再試行ロジックを実装する<br>クラウド上でアプリケーションを設計・開発する場合、一過性のエラーが発生する可能性があるため、ベストプラクティスとしてリトライロジックを実装します。この場合、クライアントクエリを再試行することで、使用可能な接続を見つけることができます。詳しくはこちらをご覧ください。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/postgresql/single-server/concepts-connectivity">Azure Database for PostgreSQL - Singlser Server の一時的な接続エラーに対処する</a></p>
+</li>
+<li><p>アイドル状態の接続を最小限にする<br>接続の管理は、PostgreSQLのユーザとの会話でよく出てくる話題です。PostgreSQLの接続はコストがかかります。アイドルでもアクティブでも、それぞれの接続は一定のメモリを消費します（1接続あたり10MB程度）。アイドル状態の接続とは、アプリケーションから接続を取得し、それを使用しないまま保持するものです。アプリケーションのコネクションプーラも、1つまたは複数のアイドル接続を消費することがあります。詳細については、以下を参照してください。<br><a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/t5/azure-database-for-postgresql/connection-handling-best-practice-with-postgresql/ba-p/790883">Connection handling best practice with PostgreSQL</a></p>
+</li>
+</ul>
+<p>statement_timeout と idle_in_transaction_session_timeout を適切に設定する方法については、以下を参照してください。<br><a target="_blank" rel="noopener" href="https://www.craigkerstiens.com/2017/09/18/postgres-connection-management/">Tracking and Managing Your Postgres Connection</a></p>
+<ul>
+<li><p>アプリケーションからKeep-alive を送信する<br>接続が一定時間アクティブでない状況で、プールされた接続がアイドルのためタイムアウトしないようにすることができます。</p>
+</li>
+<li><p>アプリケーションのリソース使用率をチェックする<br>クライアント側でリソースの負荷が高い（CPUが高い、IOPSが高い、コンテキストスイッチが高い）と、速度が低下することがあります。この遅れにより、接続が長時間にわたって開かれ、最終的に接続が切断される可能性があります。</p>
+</li>
+</ul>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/PostgreSQL/" rel="tag">PostgreSQL</a></li></ul>
+
+        
+        <a href="https://github.com/jp-ossdb/blog/edit/main/articles/postgres-single/troubleshoot-postgresql-an-existing-connection-was-forcibly.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../sample-post/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">サンプル記事 - PostgreSQL シングルサーバー</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">An existing connection forcibly closed by the remote host について</a>
+          </li>
+        
+          <li>
+            <a href="../sample-post/">サンプル記事 - PostgreSQL シングルサーバー</a>
+          </li>
+        
+          <li>
+            <a href="../../information/example/">サンプル記事 - タイトル</a>
+          </li>
+        
+          <li>
+            <a href="../../information/test/">Example article</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Example/" rel="tag">Example</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/PostgreSQL/" rel="tag">PostgreSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/PostgreSQL-%E3%82%B7%E3%83%B3%E3%82%B0%E3%83%AB%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/" rel="tag">PostgreSQL シングルサーバー</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/PostgreSQL/">PostgreSQL</a><span class="tag-list-count">1</span><ul></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/12/">2022 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/01/">2021 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/12/">2020 / 12</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Example/" style="font-size: 20px;">Example</a> <a href="../../tags/Information/" style="font-size: 20px;">Information</a> <a href="../../tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="../../tags/PostgreSQL-%E3%82%B7%E3%83%B3%E3%82%B0%E3%83%AB%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/" style="font-size: 10px;">PostgreSQL シングルサーバー</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Azure PaaS OSS Database Support Japan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
