@@ -1,6 +1,6 @@
 ---
 title: 'An existing connection forcibly closed by the remote host' について
-date: 2022-12-241 12:00:00
+date: 2022-12-24 12:00:00
 tags:
   - PostgreSQL
 disableDisclaimer: false
