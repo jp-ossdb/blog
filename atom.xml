@@ -6,7 +6,7 @@
   <link href="https://jp-ossdb.github.io/blog/atom.xml" rel="self"/>
   
   <link href="https://jp-ossdb.github.io/blog/"/>
-  <updated>2024-04-24T06:13:16.160Z</updated>
+  <updated>2025-02-02T03:26:51.855Z</updated>
   <id>https://jp-ossdb.github.io/blog/</id>
   
   <author>
@@ -17,32 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>HA 構成が有効な Azure Database for PostgreSQL フレキシブル サーバーの一部の環境にて、一時表が作れない事象の対処法と修正について</title>
-    <link href="https://jp-ossdb.github.io/blog/postgres-flexible/pgfs-ha-temp-table-creation-issue/"/>
-    <id>https://jp-ossdb.github.io/blog/postgres-flexible/pgfs-ha-temp-table-creation-issue/</id>
-    <published>2024-04-23T15:00:00.000Z</published>
-    <updated>2024-04-24T06:13:16.160Z</updated>
-    
-    <content type="html"><![CDATA[<p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p><p>Azure Database for PostgreSQL フレキシブル サーバー の一部の環境にて、一時表が作れない事象が発生しております。</p><p>上記の事象は下記の条件に全てに当てはまる Azure Database for PostgreSQL フレキシブル サーバーの一部の環境にて発生する場合があることを確認しております。</p><p>・HA 構成が有効である<br>・サーバー パラメーター azure.enable_temp_tablespaces_on_local_ssd が有効化されている<br>・サーバー作成日が 2023 年 11 月 23 日から 2024 年 3 月 24 日の期間である</p><p>上記の事象が確認された場合は、下記の対応策にて、問題の回避を行うことが可能です。</p><p>・サーバー パラメーター azure.enable_temp_tablespaces_on_local_ssd を無効化する</p><p>上記のサーバーパラメーターの無効化により、若干のパフォーマンス影響がある場合がございますが、影響の度合いにつきましてはご利用いただくワークロードに依存するため、確認を行うためには、サーバーパラメーターの無効化を検討しているサーバーを復元元とした復元を実施し、復元先でサーバーパラメーターの無効化を実施後、パフォーマンスへの影響の検証を実施されることを推奨いたします。</p><p>この度は、大変ご迷惑をおかけしております。</p><p>上記の事象の修正は今後数週間での適用を計画しており、修正の適用が完了次第、本記事でのアナウンスにおいて、更新を行う予定でございます。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。&lt;/p&gt;
-&lt;p&gt;Azure Database for PostgreSQL フレキシブル サーバー の一部の環境にて、一時表が作れない事象が発生しております。&lt;/p</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>Azure Database for PostgreSQL フレキシブルサーバー の 予定メンテナンスについて</title>
     <link href="https://jp-ossdb.github.io/blog/postgres-flexible/azure-database-for-postgresql-flexibleserver-planned-maintenance/"/>
     <id>https://jp-ossdb.github.io/blog/postgres-flexible/azure-database-for-postgresql-flexibleserver-planned-maintenance/</id>
     <published>2023-05-29T15:00:00.000Z</published>
-    <updated>2024-04-24T06:13:16.160Z</updated>
+    <updated>2025-02-02T03:26:51.855Z</updated>
     
     <content type="html"><![CDATA[<p>こんにちは、日本マイクロソフト サポートの岡本です。</p><p>本記事では Azure Database for PostgreSQL フレキシブルサーバー の 予定メンテナンスについて、メンテナンスの説明および影響と推奨事項を記載しております。<br>なお、本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p><br><h2 id="予定メンテナンスとは"><a href="#予定メンテナンスとは" class="headerlink" title="予定メンテナンスとは"></a>予定メンテナンスとは</h2><p>Azure Database for PostgreSQL フレキシブルサーバーでは、管理対象のデータベースを安全で安定した最新状態に保持するために定期的なメンテナンスが実行されます。<br>メンテナンス中に、サーバーでは新しい機能、更新プログラム、パッチが取得されます。</p><p>メンテナンス、並びにフェールオーバーの動作に関しましては、長期間のシステムダウンを防ぎながら、Azure 基盤の状態を最新に保つため必要な動作でございます。</p><br><h2 id="メンテナンスによる影響"><a href="#メンテナンスによる影響" class="headerlink" title="メンテナンスによる影響"></a>メンテナンスによる影響</h2><p>メンテナンスの適用によりフェールオーバーをトリガーした場合、Azure Database for PostgreSQL フレキシブルサーバーで利用されているデータベースサーバーの切り替え（ ＝内部的なフェールオーバー ）が自動的に実施されます。<br>この際、実行中の処理は中断され、トランザクションはロールバックされ、全ての既存の接続に瞬断が発生し切り替わりの間は新規接続も失敗いたします。<br>短時間で接続可能な状態になることが想定されておりますが、フェールオーバー発生時のトランザクション状況により、接続可能になるまでに時間を要する場合がございます。</p><p>そのため、対象の Azure Database for PostgreSQL フレキシブルサーバー への一時的な接続問題とメンテナンス期間が重なっている場合はメンテナンスによって発生したフェールオーバーによって接続断が発生したと判断することが可能です。</p><br><h2 id="推奨事項"><a href="#推奨事項" class="headerlink" title="推奨事項"></a>推奨事項</h2><ul><li>メンテナンス期間を指定する</li></ul><p>予定メンテナンスではカスタムスケジュールを設定することでメンテナンス期間を選択することができます。<br>メンテナンス期間を選択することで、ワークロード多い時間帯を避けることで予定メンテナンスによる影響を小さくすることができます。</p><p>下記のリンクでは、メンテナンススケジュールの設定方法及びイベントの通知に関してご案内がございますので、併せてご活用ください。<br><a href="https://learn.microsoft.com/ja-jp/azure/postgresql/flexible-server/how-to-maintenance-portal">Azure Database for PostgreSQL の予定メンテナンス設定の管理 - フレキシブル サーバー</a></p><br><ul><li>一時的なエラーを対応するために再試行ロジックを実装する</li></ul><p>Azure Database for PostgreSQL フレキシブルサーバー のような PaaS のデータベースをご利用される場合、メンテナンスなどによるフェールオーバー発生時の一時的な接続断の対策として、アプリケーション側で接続を再試行するためのリトライロジックを実装いただくことを推奨しております。</p><p>下記のリンクではリトライロジックを実装する際の再試行回数や間隔等の情報について言及していますので、併せてご確認ください。<br><a href="https://learn.microsoft.com/ja-jp/azure/architecture/best-practices/transient-faults">一時的な障害の処理 - Best practices for cloud applications</a></p><p>リンク先は Azure Database for PostgreSQL シングルサーバーを対象としておりますが、Azure Database for PostgreSQL フレキシブルサーバーも同様にお考えいただけますと幸いです。<br><a href="https://learn.microsoft.com/ja-jp/azure/postgresql/single-server/concepts-connectivity">Azure Database for PostgreSQL - Singlser Server の一時的な接続エラーに対処する</a></p><br><p>上記内容がお役に立ちましたら幸いです。</p><br>]]></content>
     
@@ -65,7 +44,7 @@
     <link href="https://jp-ossdb.github.io/blog/postgres-single/troubleshoot-postgresql-an-existing-connection-was-forcibly/"/>
     <id>https://jp-ossdb.github.io/blog/postgres-single/troubleshoot-postgresql-an-existing-connection-was-forcibly/</id>
     <published>2022-12-24T03:00:00.000Z</published>
-    <updated>2024-04-24T06:13:16.160Z</updated>
+    <updated>2025-02-02T03:26:51.855Z</updated>
     
     <content type="html"><![CDATA[<p>※本記事は <a href="https://techcommunity.microsoft.com/t5/azure-database-for-postgresql/troubleshoot-postgresql-an-existing-connection-was-forcibly/ba-p/925164">Troubleshoot PostgreSQL: ‘An existing connection was forcibly closed by the remote host’</a> の抄訳となります。</p><p>PostgreSQLのログに “could not receive data from client. “のようなエラーが表示された後、すぐに次のようなエラーが発生します。</p><blockquote><p>‘An existing connection was forcibly closed by the remote host’ </p></blockquote><p>この2つのエラーは相互に関連しており、クライアント側の接続処理の問題と関連していることがよくあります。</p><p>このようなタイプのエラーは、さまざまなコンポーネントが関与しているため、残念ながらトラブルシューティングが難しい場合があります。<br>このブログ記事では、このエラーが発生する原因と、それを回避するためのベストプラクティスについて説明します。</p><h2 id="既に無効になった接続"><a href="#既に無効になった接続" class="headerlink" title="既に無効になった接続"></a>既に無効になった接続</h2><p>クライアントアプリケーションが、コネクションプールから取得した接続を使用してクエリを実行しようとした場合を考えます。アプリケーションでその接続オブジェクトを使用しようとすると、接続が古くなっており既に無効になっていた場合、クライアントアプリケーションは開いている接続を介してクエリーデータを送信しようとし、例外が発生します。 クライアント側のアプリケーションが例外を捕捉し、TCP 接続が閉じられます。PostgreSQL サーバーはクライアント側の接続が閉じられたことを検出し、以下のようなエラーが返されます。</p><blockquote><p>WSAECONNRESET (10054) Connection reset by peer: An existing connection was forcibly closed by the remote host.<br>ここでいう「remote host(リモートホスト)」とは、Postgresサーバーではなくクライアントのことです。</p></blockquote><h3 id="詳細について"><a href="#詳細について" class="headerlink" title="詳細について"></a>詳細について</h3><p>何が問題を引き起こしているかを正確に理解するためには、問題が発生したときにクライアント側でネットワークトレースをキャプチャすることが有効です。ネットワークトレースは、NetMon、WireShark、Fiddlerなどの様々なアプリケーションでキャプチャすることができます。</p><p>Linuxクライアントを使用していて、上記のツールが動作しない場合、以下のコマンドのように手動でネットワークダンプを生成することができます。</p><blockquote><p>tshark -i any -n -b filesize:204800 -w <code>date +%y%m%d-%H:%M:%S</code>.pcap -b files:1000</p></blockquote><p>または</p><blockquote><p>tcpdump -i any -w <code>date +%y%m%d-%H:%M:%S</code>.pcap -G 300 -W 1000</p></blockquote><p>注：ネットワークキャプチャを有効にした場合、ディスク容量を監視し、容量不足にならないように必要に応じてファイルを削除してください。</p><h2 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h2><ul><li><p>Pgbouncerの使用<br>pgBouncerは、アプリケーションとデータベースの間に位置するコネクションプーラーです。データベースへの新しい接続が必要な場合、アプリケーションはコネクションプールから接続を取得し、それを再利用し続けます。一定の時間が経過すると、接続は解放されます。つまり、アプリケーションがデータベースへの接続を取得した後、一定時間以上使用しない場合、実際にはアイドル接続として扱われ、再利用されるため新たな接続が消費されません。<br>詳細については、以下でもご説明していますのでご参照ください<br><a href="https://techcommunity.microsoft.com/t5/azure-database-for-postgresql/not-all-postgres-connection-pooling-is-equal/ba-p/825717">Not all Postgres connection pooling is equal</a></p></li><li><p>過渡的なエラーを処理するために再試行ロジックを実装する<br>クラウド上でアプリケーションを設計・開発する場合、一過性のエラーが発生する可能性があるため、ベストプラクティスとしてリトライロジックを実装します。この場合、クライアントクエリを再試行することで、使用可能な接続を見つけることができます。詳しくはこちらをご覧ください。<br><a href="https://learn.microsoft.com/ja-jp/azure/postgresql/single-server/concepts-connectivity">Azure Database for PostgreSQL - Singlser Server の一時的な接続エラーに対処する</a></p></li><li><p>アイドル状態の接続を最小限にする<br>接続の管理は、PostgreSQLのユーザとの会話でよく出てくる話題です。PostgreSQLの接続はコストがかかります。アイドルでもアクティブでも、それぞれの接続は一定のメモリを消費します（1接続あたり10MB程度）。アイドル状態の接続とは、アプリケーションから接続を取得し、それを使用しないまま保持するものです。アプリケーションのコネクションプーラも、1つまたは複数のアイドル接続を消費することがあります。詳細については、以下を参照してください。<br><a href="https://techcommunity.microsoft.com/t5/azure-database-for-postgresql/connection-handling-best-practice-with-postgresql/ba-p/790883">Connection handling best practice with PostgreSQL</a></p></li></ul><p>statement_timeout と idle_in_transaction_session_timeout を適切に設定する方法については、以下を参照してください。<br><a href="https://www.craigkerstiens.com/2017/09/18/postgres-connection-management/">Tracking and Managing Your Postgres Connection</a></p><ul><li><p>アプリケーションからKeep-alive を送信する<br>接続が一定時間アクティブでない状況で、プールされた接続がアイドルのためタイムアウトしないようにすることができます。</p></li><li><p>アプリケーションのリソース使用率をチェックする<br>クライアント側でリソースの負荷が高い（CPUが高い、IOPSが高い、コンテキストスイッチが高い）と、速度が低下することがあります。この遅れにより、接続が長時間にわたって開かれ、最終的に接続が切断される可能性があります。</p></li></ul>]]></content>
     
