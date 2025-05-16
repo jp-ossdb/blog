@@ -6,7 +6,9 @@ disableDisclaimer: false
 
 # Azure OSS PaaS サービスのサポート範囲について（PostgreSQL, MySQL, Citus） 
 
-こんにちは。Azure OSS サポートチームです。 今回の投稿では、Azure Database for PostgreSQL Flexible Server、Azure Database for MySQL Flexible Server、Azure Cosmos DB for PostgreSQL に関連するサポート範囲について、オープンソースソフトウェア（OSS）としての側面を踏まえながらご案内いたします。 お客様から多くいただく質問をベースに、すべてのお客様に対して公平かつ安定したサポートを提供するため、サポート範囲を明確にご説明します。
+こんにちは。Azure OSS サポートチームです。  <br>
+今回の投稿では、Azure Database for PostgreSQL Flexible Server、Azure Database for MySQL Flexible Server、Azure Cosmos DB for PostgreSQL に関連するサポート範囲について、オープンソースソフトウェア（OSS）としての側面を踏まえながらご案内いたします。 <br>
+お客様から多くいただく質問をベースに、すべてのお客様に対して公平かつ安定したサポートを提供するため、サポート範囲を明確にご説明します。
 
 <br>
 
