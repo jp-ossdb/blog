@@ -15,7 +15,9 @@ disableDisclaimer: false
 まず、下記のサービスは、弊チームが担当している製品であり、いずれもオープンソースソフトウェア（OSS）をベースに構築されたPaaS のマネージドサービスです。 
 
 ・Azure Database for PostgreSQL Flexible Server 
+
 ・Azure Database for MySQL Flexible Server 
+
 ・Azure Cosmos DB for PostgreSQL  
 
 一方、PostgreSQL や MySQL、Citus といった OSS 自体は、弊社製品ではございません。そのため、OSS 自体の仕様や挙動(例：SQL 構文の動作、オプティマイザの挙動、組み込み関数の仕様など) に関するご質問は、サポート範囲外となっております。また、Azure サポートでは各サービスに対して専任のチームが存在し、たとえば、Azure Virtual Machines や Storage に関するご質問は、それぞれの専門チームのみが対応しております。同様に、OSS 自体の仕様や挙動に関するご質問も、OSSの性質上、いかなる専任チームも存在しないため、Azure サポート全体として正式なサポート対象には含まれておりません。  
@@ -27,17 +29,24 @@ PostgreSQL、MySQL、Citus をはじめとする OSS は、ソースコードが
 
 ## [AS IS 条文]
  
-・Citus OSSから抜粋 "THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE." 
+・Citus OSSから抜粋 
+
+"THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE." 
+
 [Citus AS IS]([https://github.com/marcoalbarelli/PostgreSQL/blob/master/LICENSE](https://github.com/citusdata/citus/blob/main/LICENSE))
 
  
 ・MySQLから抜粋
+
 "BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIROR CORRECTION."
+
 [MySQL AS IS](https://github.com/mysql/mysql-server/blob/trunk/LICENSE)
 
  
 ・PostgreSQLから抜粋
+
 "THE UNIVERSITY OF CALIFORNIA SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE SOFTWARE PROVIDED HEREUNDER IS ON AN "AS IS" BASIS, AND THE UNIVERSITY OF CALIFORNIA HAS NO OBLIGATIONS TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS."
+
 [PostgreSQL AS IS](https://github.com/marcoalbarelli/PostgreSQL/blob/master/LICENSE)
  
 例えば、弊社は、Citus OSS の開発に関与している一方、それは Citus OSS コミュニティに対する貢献であり、Citus に限らず OSS の開発には全ての人が参加できる性質から、Citus OSS の仕様や動作に関して、弊社が全ての責任を負うものではございません。上記の AS IS 条文に相当する記載は、Citus に限らずその他の OSS においても共通のものとなります。
@@ -48,7 +57,8 @@ PostgreSQL、MySQL、Citus をはじめとする OSS は、ソースコードが
 
 ## サポート範囲に含まれる内容について
  
-・サーバー起動や停止に関する問題（例. サーバーが正常に起動しない、停止操作が反映されない等々） → Azure がインフラ管理を行っており、起動/停止はマネージドサービスの範囲です。
+・サーバー起動や停止に関する問題（例. サーバーが正常に起動しない、停止操作が反映されない等々） 
+→ Azure がインフラ管理を行っており、起動/停止はマネージドサービスの範囲です。
  
 ・接続関連の問題（例. ポータル経由での接続エラー、認証情報の設定エラー等々） → 接続管理は Azure 環境下で設定されるため、Azure サポート対象です。
 ※弊チームはDB側の調査を行うことが可能ですが、例として、AKSから独自のDNS、ロードバランサーなど経由してAzure Database for PostgreSQL flexible serverへなど複雑なシナリオでは、クライアントやネットワーク製品の基盤部の調査であれば、別チームの対応が必要となります。また、クライアント接続設定やネットワークリソースの設定であればお客様対応範囲となります。また、異なる例として、例えばパスワードエラーであることをこちらから回答することは可能ですが、正しいパスワードをクライアントのどの箇所にどのように入れれば良いかの回答はサポート契約内で行うことができません。
