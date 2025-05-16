@@ -1,7 +1,6 @@
 ---
 title: Azure OSS PaaS サービスのサポート範囲について（PostgreSQL, MySQL, Citus） 
 date: 2025-05-01 00:00:00
-tags:　
 disableDisclaimer: false
 ---
 
