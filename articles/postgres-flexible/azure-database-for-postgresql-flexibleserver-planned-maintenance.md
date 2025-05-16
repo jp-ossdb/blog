@@ -1,12 +1,12 @@
 ---
-title: Azure Database for PostgreSQL フレキシブルサーバー の 予定メンテナンスについて
+title: Azure Database for PostgreSQL フレキシブルサーバー の メンテナンスについて
 date: 2023-05-30 00:00:00
 tags:
   - PostgreSQL
 disableDisclaimer: false
 ---
 
-# Azure Database for PostgreSQL フレキシブルサーバー の 予定メンテナンスについて
+# Azure Database for PostgreSQL フレキシブルサーバー の メンテナンスについて
 
 こんにちは、日本マイクロソフト サポートの岡本です。
 
