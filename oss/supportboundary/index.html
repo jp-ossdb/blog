@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Azure OSS PaaS サービスのサポート範囲について（PostgreSQL, MySQL, Citus）  | Japan CSS Support - PaaS OSS Database Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは。Azure OSS サポートチームです。 今回の投稿では、Azure Database for PostgreSQL Flexible Server、Azure Database for MySQL Flexible Server、Azure Cosmos DB for PostgreSQL に関連するサポート範囲について、オープンソースソフトウェア（OSS）としての側面を踏まえな">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Azure OSS PaaS サービスのサポート範囲について（PostgreSQL, MySQL, Citus） ">
+<meta property="og:url" content="https://jp-ossdb.github.io/blog/oss/supportboundary/index.html">
+<meta property="og:site_name" content="Japan CSS Support - PaaS OSS Database Blog">
+<meta property="og:description" content="こんにちは。Azure OSS サポートチームです。 今回の投稿では、Azure Database for PostgreSQL Flexible Server、Azure Database for MySQL Flexible Server、Azure Cosmos DB for PostgreSQL に関連するサポート範囲について、オープンソースソフトウェア（OSS）としての側面を踏まえな">
+<meta property="og:locale" content="ja_JP">
+<meta property="article:published_time" content="2025-04-30T15:00:00.000Z">
+<meta property="article:modified_time" content="2025-05-16T01:53:19.819Z">
+<meta property="article:author" content="Azure PaaS OSS Database Support Japan">
+<meta property="article:tag" content="Azure DB">
+<meta property="article:tag" content="Azure PostgreSQL">
+<meta property="article:tag" content="Azure MySQL">
+<meta property="article:tag" content="Azure MariaDB">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan CSS Support - PaaS OSS Database Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jp-ossdb.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan CSS Support - PaaS OSS Database Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフト Azure Database for PostgreSQL / MySQL / MariaDB サポート情報ブログ</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-oss/supportboundary" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Azure OSS PaaS サービスのサポート範囲について（PostgreSQL, MySQL, Citus） 
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2025-04-30T15:00:00.000Z" itemprop="datePublished">2025-05-01</time>
+</a>
+        
+        
+        <a href="https://github.com/jp-ossdb/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+ff942421-1687-5239-a069-387269f2c312%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAzure+OSS+PaaS+%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%AE%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E7%AF%84%E5%9B%B2%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%EF%BC%88PostgreSQL%2C+MySQL%2C+Citus%EF%BC%89%E2%80%A8%5D%28https%3A%2F%2Fjp-ossdb.github.io%2Fblog%2Foss%2Fsupportboundary%2F%29%0A*+Content+Source%3A+%5Barticles%2Foss%2Fsupportboundary.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-ossdb%2Fblog%2Fblob%2Fmain%2Farticles%2Foss%2Fsupportboundary.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jp-ossdb.github.io/blog/oss/supportboundary/" data-id="cmaq59pls00000nmu0p2z18rh" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> </p>
+<p>こんにちは。Azure OSS サポートチームです。 今回の投稿では、Azure Database for PostgreSQL Flexible Server、Azure Database for MySQL Flexible Server、Azure Cosmos DB for PostgreSQL に関連するサポート範囲について、オープンソースソフトウェア（OSS）としての側面を踏まえながらご案内いたします。 お客様から多くいただく質問をベースに、すべてのお客様に対して公平かつ安定したサポートを提供するため、サポート範囲を明確にご説明します。</p>
+<br>
+
+<h2 id="OSS-ベースの-Azure-PaaS-サービスについて"><a href="#OSS-ベースの-Azure-PaaS-サービスについて" class="headerlink" title="OSS ベースの Azure PaaS サービスについて"></a>OSS ベースの Azure PaaS サービスについて</h2><p>まず、下記のサービスは、弊チームが担当している製品であり、いずれもオープンソースソフトウェア（OSS）をベースに構築されたPaaS のマネージドサービスです。 </p>
+<p>・Azure Database for PostgreSQL Flexible Server <br>・Azure Database for MySQL Flexible Server <br>・Azure Cosmos DB for PostgreSQL  </p>
+<p>一方、PostgreSQL や MySQL、Citus といった OSS 自体は、弊社製品ではございません。そのため、OSS 自体の仕様や挙動(例：SQL 構文の動作、オプティマイザの挙動、組み込み関数の仕様など) に関するご質問は、サポート範囲外となっております。また、Azure サポートでは各サービスに対して専任のチームが存在し、たとえば、Azure Virtual Machines や Storage に関するご質問は、それぞれの専門チームのみが対応しております。同様に、OSS 自体の仕様や挙動に関するご質問も、OSSの性質上、いかなる専任チームも存在しないため、Azure サポート全体として正式なサポート対象には含まれておりません。  </p>
+<p>PostgreSQL、MySQL、Citus をはじめとする OSS は、ソースコードがGitHub上で公開されており、全ての方が自由に使用・開発に参加できるという特性を持っています。一方で、 OSS のライセンスにおいては、利用による不具合や結果に対して提供元が責任を負わないことが明記されています (AS IS条文)。</p>
+<br>
+
+<h2 id="AS-IS-条文"><a href="#AS-IS-条文" class="headerlink" title="[AS IS 条文]"></a>[AS IS 条文]</h2><p> <br>・Citus OSSから抜粋 “THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.” <br><a href="%5Bhttps://github.com/marcoalbarelli/PostgreSQL/blob/master/LICENSE%5D(https://github.com/citusdata/citus/blob/main/LICENSE)">Citus AS IS</a></p>
+<p> <br>・MySQLから抜粋<br>“BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIROR CORRECTION.”<br><a target="_blank" rel="noopener" href="https://github.com/mysql/mysql-server/blob/trunk/LICENSE">MySQL AS IS</a></p>
+<p> <br>・PostgreSQLから抜粋<br>“THE UNIVERSITY OF CALIFORNIA SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE SOFTWARE PROVIDED HEREUNDER IS ON AN “AS IS” BASIS, AND THE UNIVERSITY OF CALIFORNIA HAS NO OBLIGATIONS TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.”<br><a target="_blank" rel="noopener" href="https://github.com/marcoalbarelli/PostgreSQL/blob/master/LICENSE">PostgreSQL AS IS</a><br> <br>例えば、弊社は、Citus OSS の開発に関与している一方、それは Citus OSS コミュニティに対する貢献であり、Citus に限らず OSS の開発には全ての人が参加できる性質から、Citus OSS の仕様や動作に関して、弊社が全ての責任を負うものではございません。上記の AS IS 条文に相当する記載は、Citus に限らずその他の OSS においても共通のものとなります。<br> <br>従って、OSS 自体へのご質問につきましては、回答をお約束するものではありませんが、ご参考情報としてご案内を差し上げることが可能な場合がございます。その場合は、調査・回答にはお時間をいただく必要があり、またその内容についての正確性・完全性は弊社は保証いたしかねますことを、あらかじめご了承いただけますと幸いです。</p>
+<br>
+
+<h2 id="サポート範囲に含まれる内容について"><a href="#サポート範囲に含まれる内容について" class="headerlink" title="サポート範囲に含まれる内容について"></a>サポート範囲に含まれる内容について</h2><p> <br>・サーバー起動や停止に関する問題（例. サーバーが正常に起動しない、停止操作が反映されない等々） → Azure がインフラ管理を行っており、起動/停止はマネージドサービスの範囲です。<br> <br>・接続関連の問題（例. ポータル経由での接続エラー、認証情報の設定エラー等々） → 接続管理は Azure 環境下で設定されるため、Azure サポート対象です。<br>※弊チームはDB側の調査を行うことが可能ですが、例として、AKSから独自のDNS、ロードバランサーなど経由してAzure Database for PostgreSQL flexible serverへなど複雑なシナリオでは、クライアントやネットワーク製品の基盤部の調査であれば、別チームの対応が必要となります。また、クライアント接続設定やネットワークリソースの設定であればお客様対応範囲となります。また、異なる例として、例えばパスワードエラーであることをこちらから回答することは可能ですが、正しいパスワードをクライアントのどの箇所にどのように入れれば良いかの回答はサポート契約内で行うことができません。<br> <br>・ネットワーク設定関連（例. VNet 統合やファイアウォール設定の問題等々） → ネットワークやファイアウォール設定は、Azure マネージド機能として提供されています。<br>※弊チームはDB側の調査を行うことが可能ですが、例として、AKSから独自のDNS、ロードバランサーなど経由してAzure Database for PostgreSQL flexible serverへなど複雑なシナリオでは、クライアントやネットワーク製品の基盤部の調査であれば、別チームの対応が必要となります。また、クライアント接続設定やネットワークリソースの設定であればお客様対応範囲となります。また、異なる例として、例えばパスワードエラーであることをこちらから回答することは可能ですが、正しいパスワードをクライアントのどの箇所にどのように入れれば良いかの回答はサポート契約内で行うことができません。<br> <br>・リソース逼迫の要因調査（例. リソース使用率が高い等々） → リソースやパフォーマンスの高騰の要因がAzure側にて何か被疑箇所があるか調査可能です。<br>※上記の問題の切り分けの結果、アプリケーションからのワークロードを要因と判明した場合、その要因であるワークロードの軽減策の案内は、サポート契約内で行うことはできません。<br> <br>・I/O 性能に関する問題（例. ディスクスループットが低下、書き込み速度が遅い等々） → ストレージ性能は Azure インフラに依存するため、サポート対象です。<br>※上記の問題の切り分けの結果、アプリケーションからのワークロードを要因と判明した場合、その要因であるワークロードの軽減策の案内は、サポート契約内で行うことはできません。<br> <br>・リソース管理に関する問題（例. CPU やメモリ使用率が異常に高い等々） → リソース管理は、Azure のマネージド機能として対応可能です。<br>※上記の問題の切り分けの結果、アプリケーションからのワークロードを要因と判明した場合、その要因であるワークロードの軽減策の案内は、サポート契約内で行うことはできません。<br> <br>・バックアップやリストア操作のエラー（例. 自動バックアップが失敗、PITR ができない等々） → バックアップ機能は Azure 側で管理されているため、サポート対象です。<br> <br>・データ復旧操作のサポート（例. ポイントインタイムリストアが完了しない等々） → Azure マネージドサービスとしてバックアップとリストアが提供されているためです。<br> <br>・スケーリング操作に関する問題（例. サーバーサイズ変更が反映されない等々） → スケーリング操作は、Azure ポータルや CLI から実施され、Azure 管理下にあります。<br> <br>・高可用性（HA）関連の問題（例. フェイルオーバーが発生しない、HA 構成が反映されない等々） → Azure が管理する HA 機能であるため、サポート対象です。<br> <br>・パラメータ設定の適用エラー（例. 設定変更が反映されない、再起動後に失敗等々） → パラメータ管理はマネージドサービス範囲です。<br> <br>・ノードの追加や削除が反映されない（例. クラスター構成の変更が反映されない等々） → クラスター管理は Azure のマネージド機能であるため、対応可能です。<br> <br>・クエリパフォーマンス監視ができない（例. モニタリングツールのデータが取得できない等々） → Azure Monitor との統合部分はサポート対象です。</p>
+<br>
+
+<h2 id="サポート範囲に含まれる内容について-1"><a href="#サポート範囲に含まれる内容について-1" class="headerlink" title="サポート範囲に含まれる内容について"></a>サポート範囲に含まれる内容について</h2><p>・クエリオプティマイザの挙動に関する質問（例. 特定のクエリでインデックスが利用されない理由を知りたい等々） → クエリオプティマイザの動作は、PostgreSQL OSS 自体の設計仕様に依存しているため、Azure 側で制御できる部分ではないためサポート対象外です。<br> <br>・拡張モジュールやプラグインの不具合に関する質問（例. pg_stat_statements が特定環境で正しく動作しない、本番環境で MySQL プラグインがクラッシュする等々） → 拡張モジュールやプラグイン自体は OSS 部分であり、Microsoft が直接管理・保証しているわけではないためサポート対象外です。<br> <br>・内部エンジンの動作に関する技術的質問（例. VACUUM 処理中のメモリ使用量が多い理由を知りたい等々） → VACUUM やオートバキュームは、PostgreSQL OSS の内部アルゴリズムに依存し、Azure 側で制御しているわけではないためサポート対象外です。<br> <br>・SQL 構文に関する仕様解釈の質問（例. 特定のクエリで意図した結果が得られない等々） → SQL の仕様や挙動は、PostgreSQL OSS 自体の標準機能であり、Azure が設計や実装を管理しているわけではないためサポート対象外です。<br> <br>・InnoDB ストレージエンジンの内部挙動に関する質問（例. InnoDB が特定条件で遅くなる理由を知りたい等々） → InnoDB の挙動は、MySQL OSS 自体の仕様に依存しており、Azure 側が制御している部分ではないためサポート対象外です。<br> <br>・バージョンアップに伴う非互換性に関する質問（例. MySQL 5.7 から 8.0 に移行した際に動作が変わった等々） → バージョンアップによる仕様変更は OSS 側で管理されているため、Azure サービスとしての制御範囲外です。<br> <br>・SQL チューニングに関する詳細な技術サポート（例. 特定クエリのパフォーマンスが低下する原因を調査してほしい等々） → クエリチューニング自体は OSS 側の性能最適化の問題であり、Azure サービスの範囲外です。<br> <br>・Citus 特有の関数や演算子に関する仕様解釈（例. 特定の集計クエリが分散環境で動作しない等々） → Citus OSS の拡張機能はオープンソースとして提供されているため、Azure が直接管理している部分ではないためサポート対象外です。<br> <br>・Citus OSS バージョン固有のバグに関する質問（例. GitHub に報告されている Citus の既知バグについて詳細を教えてほしい等々） → GitHub 上で報告されたバグはOSS コミュニティで解決されるべき問題であり、Azure サポートが直接対応できる範囲外です。<br> <br>・SQL 処理におけるパーティショニング問題（例. 特定のパーティションテーブルでクエリが遅い等々） → 分散処理やパーティショニングの挙動は Citus OSS のアルゴリズムに依存し、Azure 側で制御する範囲外です。</p>
+<br>
+
+<h2 id="適切な問い合わせ先について-OSS-に関する公式サポートリソース"><a href="#適切な問い合わせ先について-OSS-に関する公式サポートリソース" class="headerlink" title="適切な問い合わせ先について(OSS に関する公式サポートリソース)"></a>適切な問い合わせ先について(OSS に関する公式サポートリソース)</h2><p> <br>このご案内は、 OSS の性質および弊社サポートの提供範囲を明確にすることで、全てのお客様に対して公平で安定したサポートを提供するためのものです。ご理解のほどよろしくお願い申し上げます。OSS に関する正式で詳細な技術サポートをご希望の場合は、以下が適切なリソースとなりますため、ご検討いただけますと幸いです。</p>
+<p>• <a target="_blank" rel="noopener" href="https://www.postgresql.org/support/">PostgreSQL コミュニティ</a><br>• <a target="_blank" rel="noopener" href="https://dev.mysql.com/support/">MySQL コミュニティ</a><br>• <a target="_blank" rel="noopener" href="https://www.citusdata.com/support/">Citus OSS</a></p>
+<br>
+
+<p>## まとめ </p>
+<p>Azure サービスとして提供されている部分については、Microsoft が責任を持ってサポートいたします。<br>一方、OSS の仕様や動作に関するご質問についてはサポート範囲外となります。 <br>これらの点を正しくご理解いただき、適切なサポートリソースをご活用いただけますと幸いです。 <br>引き続き、Azure サービスのご利用にあたりご不明な点がございましたら、サポートまでお問い合わせください。</p>
+<br>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+        
+        <a href="https://github.com/jp-ossdb/blog/edit/main/articles/oss/supportboundary.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../../postgres-flexible/azure-database-for-postgresql-flexibleserver-planned-maintenance/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Azure Database for PostgreSQL フレキシブルサーバー の メンテナンスについて</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">Azure OSS PaaS サービスのサポート範囲について（PostgreSQL, MySQL, Citus） </a>
+          </li>
+        
+          <li>
+            <a href="../../postgres-flexible/azure-database-for-postgresql-flexibleserver-planned-maintenance/">Azure Database for PostgreSQL フレキシブルサーバー の メンテナンスについて</a>
+          </li>
+        
+          <li>
+            <a href="../../postgres-single/troubleshoot-postgresql-an-existing-connection-was-forcibly/">An existing connection forcibly closed by the remote host について</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/PostgreSQL/" rel="tag">PostgreSQL</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/PostgreSQL/">PostgreSQL</a><span class="tag-list-count">2</span><ul></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/12/">2022 / 12</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2025 Azure PaaS OSS Database Support Japan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
