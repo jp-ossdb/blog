@@ -14,10 +14,8 @@ disableDisclaimer: false
 
 まず、下記のサービスは、弊チームが担当している製品であり、いずれもオープンソースソフトウェア（OSS）をベースに構築されたPaaS のマネージドサービスです。 
 
-・Azure Database for PostgreSQL Flexible Server 
-
-・Azure Database for MySQL Flexible Server 
-
+・Azure Database for PostgreSQL Flexible Server<br> 
+・Azure Database for MySQL Flexible Server <br>
 ・Azure Cosmos DB for PostgreSQL  
 
 一方、PostgreSQL や MySQL、Citus といった OSS 自体は、弊社製品ではございません。そのため、OSS 自体の仕様や挙動(例：SQL 構文の動作、オプティマイザの挙動、組み込み関数の仕様など) に関するご質問は、サポート範囲外となっております。また、Azure サポートでは各サービスに対して専任のチームが存在し、たとえば、Azure Virtual Machines や Storage に関するご質問は、それぞれの専門チームのみが対応しております。同様に、OSS 自体の仕様や挙動に関するご質問も、OSSの性質上、いかなる専任チームも存在しないため、Azure サポート全体として正式なサポート対象には含まれておりません。  
