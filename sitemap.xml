@@ -4,21 +4,21 @@
   <url>
     <loc>https://jp-ossdb.github.io/blog/postgres-flexible/azure-database-for-postgresql-flexibleserver-planned-maintenance/</loc>
     
-    <lastmod>2025-02-02</lastmod>
+    <lastmod>2025-05-16</lastmod>
     
   </url>
   
   <url>
     <loc>https://jp-ossdb.github.io/blog/postgres-single/troubleshoot-postgresql-an-existing-connection-was-forcibly/</loc>
     
-    <lastmod>2025-02-02</lastmod>
+    <lastmod>2025-05-16</lastmod>
     
   </url>
   
 
   <url>
     <loc>https://jp-ossdb.github.io/blog</loc>
-    <lastmod>2025-02-02</lastmod>
+    <lastmod>2025-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -26,7 +26,7 @@
   
   <url>
     <loc>https://jp-ossdb.github.io/blog/tags/PostgreSQL/</loc>
-    <lastmod>2025-02-02</lastmod>
+    <lastmod>2025-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
