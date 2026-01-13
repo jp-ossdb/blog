@@ -1,5 +1,5 @@
 ---
-title: Azure Database for PostgreSQL / MySQL フレキシブル サーバーのバースト可能コンピュートについて
+title: バースト可能コンピュートは、どの用途で利用するべきか？
 date: 2026-01-14 00:00:00
 disableDisclaimer: false
 ---
