@@ -2,37 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://jp-ossdb.github.io/blog/postgres-flexible/azure-database-for-postgresql-flexibleserver-planned-maintenance/</loc>
+    <loc>https://jp-ossdb.github.io/blog/oss/supportboundary/</loc>
     
-    <lastmod>2026-01-13</lastmod>
+    <lastmod>2026-01-17</lastmod>
     
   </url>
   
   <url>
     <loc>https://jp-ossdb.github.io/blog/postgres-single/troubleshoot-postgresql-an-existing-connection-was-forcibly/</loc>
     
-    <lastmod>2026-01-13</lastmod>
+    <lastmod>2026-01-17</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jp-ossdb.github.io/blog/oss/supportboundary/</loc>
+    <loc>https://jp-ossdb.github.io/blog/postgres-flexible/azure-database-for-postgresql-flexibleserver-planned-maintenance/</loc>
     
-    <lastmod>2026-01-13</lastmod>
+    <lastmod>2026-01-17</lastmod>
     
   </url>
   
   <url>
     <loc>https://jp-ossdb.github.io/blog/oss/burstable/</loc>
     
-    <lastmod>2026-01-13</lastmod>
+    <lastmod>2026-01-17</lastmod>
     
   </url>
   
 
   <url>
     <loc>https://jp-ossdb.github.io/blog</loc>
-    <lastmod>2026-01-13</lastmod>
+    <lastmod>2026-01-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -40,7 +40,7 @@
   
   <url>
     <loc>https://jp-ossdb.github.io/blog/tags/PostgreSQL/</loc>
-    <lastmod>2026-01-13</lastmod>
+    <lastmod>2026-01-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
