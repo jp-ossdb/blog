@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>プロダクトを一緒に育てるために、Azure OSSサポートの使い方 | Japan CSS Support - PaaS OSS Database Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="私たちが扱うAzureのOSS（Azure Database for PostgreSQL &#x2F; MySQL flexible server）のマネージドサービスは、日々すごいスピードで機能が増えています。それと同時に、ドキュメントも常に更新され続けており、日本語版は自動翻訳をベースに整備されているページも少なくありません。その結果として、なんとなく言いたいことは分かるけれど、日本語として少し読みづ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="プロダクトを一緒に育てるために、Azure OSSサポートの使い方">
+<meta property="og:url" content="https://jp-ossdb.github.io/blog/oss/product-management/index.html">
+<meta property="og:site_name" content="Japan CSS Support - PaaS OSS Database Blog">
+<meta property="og:description" content="私たちが扱うAzureのOSS（Azure Database for PostgreSQL &#x2F; MySQL flexible server）のマネージドサービスは、日々すごいスピードで機能が増えています。それと同時に、ドキュメントも常に更新され続けており、日本語版は自動翻訳をベースに整備されているページも少なくありません。その結果として、なんとなく言いたいことは分かるけれど、日本語として少し読みづ">
+<meta property="og:locale" content="ja_JP">
+<meta property="article:published_time" content="2026-01-20T15:00:00.000Z">
+<meta property="article:modified_time" content="2026-01-20T21:35:50.345Z">
+<meta property="article:author" content="Azure PaaS OSS Database Support Japan">
+<meta property="article:tag" content="Azure DB">
+<meta property="article:tag" content="Azure PostgreSQL">
+<meta property="article:tag" content="Azure MySQL">
+<meta property="article:tag" content="Azure MariaDB">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan CSS Support - PaaS OSS Database Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jp-ossdb.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan CSS Support - PaaS OSS Database Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフト Azure Database for PostgreSQL / MySQL / MariaDB サポート情報ブログ</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-oss/product-management" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      プロダクトを一緒に育てるために、Azure OSSサポートの使い方
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2026-01-20T15:00:00.000Z" itemprop="datePublished">2026-01-21</time>
+</a>
+        
+        
+        <a href="https://github.com/jp-ossdb/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+0c27fc45-86e8-5492-af5b-0985a8838080%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E3%83%97%E3%83%AD%E3%83%80%E3%82%AF%E3%83%88%E3%82%92%E4%B8%80%E7%B7%92%E3%81%AB%E8%82%B2%E3%81%A6%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB%E3%80%81Azure+OSS%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9%5D%28https%3A%2F%2Fjp-ossdb.github.io%2Fblog%2Foss%2Fproduct-management%2F%29%0A*+Content+Source%3A+%5Barticles%2Foss%2Fproduct-management.md%5D%28https%3A%2F%2Fgithub.com%2Fjp-ossdb%2Fblog%2Fblob%2Fmain%2Farticles%2Foss%2Fproduct-management.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jp-ossdb.github.io/blog/oss/product-management/" data-id="cmkn45jcl00000nt9euo5al76" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>私たちが扱うAzureのOSS（Azure Database for PostgreSQL / MySQL flexible server）のマネージドサービスは、日々すごいスピードで機能が増えています。それと同時に、ドキュメントも常に更新され続けており、日本語版は自動翻訳をベースに整備されているページも少なくありません。その結果として、なんとなく言いたいことは分かるけれど、日本語として少し読みづらいであったり、本当にこのとおりの仕様なのか不安になるといったモヤモヤを感じる場面もあると思います。</p>
+<p>一方で、お客様の現場では、そのサービスを使って本番システムを支え、ビジネスを動かしていただいています。<br>このギャップを埋めるために、私たちサポートチームが何をしているのか。<br>そして、お客様にどのような情報をいただけるとさらに製品をより良くしていけるのかをお伝えしたい、というのが本記事の意図です。</p>
+<h2 id="ドキュメントの違和感は、遠慮なく教えてほしい"><a href="#ドキュメントの違和感は、遠慮なく教えてほしい" class="headerlink" title="ドキュメントの違和感は、遠慮なく教えてほしい"></a>ドキュメントの違和感は、遠慮なく教えてほしい</h2><p>まず、Azure のドキュメント（Microsoft Learn）は、グローバルの仕組みとして、すべてのページにフィードバック機能が用意されています。各ページの上部や下部にある「フィードバック &gt; このページは役に立ちましたか？」から、内容が分かりづらかった点や誤りの可能性を直接送ることはできます。<br>とはいえ、実際のところ、運用中に気になった箇所についてのフィードバックは、担当者をつけるのが1番良いと考えます。</p>
+<p>そのためにサポートリクエストを上げて、弊チームに気軽な気持ちでご相談いただけたらと私たちを考えています。<br>サポートリクエストを作成いただく際に、 「このドキュメントの、この段落が分かりづらかった」や「日本語のニュアンスが英語版と違うように見える」といった形で URL と該当箇所を教えていただくことも、とても重要な情報になります。<br>私たちサポートチームは、その情報を整理したうえで、ドキュメント担当チームやプロダクトチームにお客様の声としてお届けしています。このページではどのように具体的に開発部門と連携をしているかと言うところも後述いたします。</p>
+<h2 id="「できない」ときこそ、理由や背景を教えていただきたい"><a href="#「できない」ときこそ、理由や背景を教えていただきたい" class="headerlink" title="「できない」ときこそ、理由や背景を教えていただきたい"></a>「できない」ときこそ、理由や背景を教えていただきたい</h2><p>サポートにお問い合わせいただく内容は、大きく分けると二種類あります。</p>
+<ol>
+<li>既存機能や仕様の範囲で、問題を解決する（トラブルシューティング）</li>
+<li>したいことや、できないことに対するご相談</li>
+</ol>
+<p>1つ目は、いわゆる問題解決のサポートです。<br>一方で、2つ目はプロダクトマネジメントに直結する内容です。</p>
+<p>クラウドの強みは、現行仕様としてはできないことも、将来のアップデートで実現できる可能性があることです。<br>Azure Database for PostgreSQL / MySQL flexible serverも、ここ数年でできることが継続的に増えてきています。<br>ここで、お客様にぜひお願いしたいのが、「なぜその機能が必要なのか」「ビジネス上どのようなインパクトがあるのか」をできるだけ具体的に教えていただくことです。<br>たとえば、以下のような情報があると、私たちサポートチームがプロダクトチームにエスカレーションする際に、単なる思いつきの改善要望ではなく、現場で実際に困っているお客様の具体的なニーズとして伝えることができます。</p>
+<ul>
+<li>ビジネスやシステム全体でどのような背景でその要件になっているのか</li>
+<li>既存の機能や設定で代替すると、どこに無理が出るのか</li>
+<li>運用チームや開発チームにとって、どのような手間やリスクが発生しているのか</li>
+</ul>
+<h2 id="完璧ではないこと、完璧を目指し続けること"><a href="#完璧ではないこと、完璧を目指し続けること" class="headerlink" title="完璧ではないこと、完璧を目指し続けること"></a>完璧ではないこと、完璧を目指し続けること</h2><p>ここで誤解していただきたくないのは、「一緒にサービスを育てていきたい」という言葉は、「とりあえず中で開発しているから、細かいところはお客様の力でなんとかしてほしい」という意味では決してないということです。<br>この世に存在するどのようなプロダクトでも、まず作る側は作る側の視点から、可能な限り良いものになるよう作るという特徴があります。想定しているユースケース、セキュリティや信頼性の要件、コストやパフォーマンスの制約 といった多くの前提を踏まえながら、今できるベストを目指して設計が進んでいきます。</p>
+<p>ただ、どれだけ真剣に考えても、現実には視座の観点でもある程度の限界があります。すべての環境、すべての業種、すべてのパターンを最初から完全にカバーすることは、クラウドに限らず、業界を超え、すべてのプロダクトでほぼ不可能です。<br>むしろ、完全に分かったつもりになり、進化させることをやめてしまうことのほうが、長期的には危険だと考えます。<br>大事なのは、最初から完璧にできているかどうかよりも、完璧にはできないかもしれないが、可能な限り完璧に近づこうとし続けることを実行することだと私たちは考えています。<br>この完璧を目指し続ける姿勢は、開発もサポートも同じです。<br>リリースされたサービスをどう検証し、どうドキュメント化し、どうお客様に届けるか。その過程のどこかで漏れや解釈の揺れがあった場合でも、お客様の声を聞き、必要であれば設計や表現を見直し、その結果をまた次のリリースやドキュメントに反映していくというサイクルを早く回し続けることで、少しずつ現場にとっての実用的な完璧に近づけていくことができます。<br>その意味で、内側だけで考えられる限界を、お客様の現場の視点で押し広げていただく。そのような背景からお客様の力が必要です。</p>
+<h2 id="サポートは問い合わせ窓口ではなく、プロダクトとの橋渡し役"><a href="#サポートは問い合わせ窓口ではなく、プロダクトとの橋渡し役" class="headerlink" title="サポートは問い合わせ窓口ではなく、プロダクトとの橋渡し役"></a>サポートは問い合わせ窓口ではなく、プロダクトとの橋渡し役</h2><p>ここからは、日々プロダクトマネージャー（PM）とやり取りしている立場として、少し具体的な空気感をお伝えしたいところです。<br>社内の会話のトーンとして、決して「うちのロードマップはこう決まっているから、その要望は無理です」という 決め打ちで終わるものではありません。<br>むしろ、「確かにその声はもっともだ」「それは今の仕様だとつらいね」といった形で、お客様の声の妥当性そのものを一緒に検証するスタンスが強いです。<br>そのうえで、妥当だと判断されたものについては、既存のロードマップの中で優先度が見直される あるいは、ご要望の一部だけでも早めに取り込めないか検討されたりといった動きになります。<br>ドキュメントについても同様で、「ここは確かに分かりにくい」「このパターンは現状の説明だと漏れてしまっている」といった議論になれば、その日のうち、あるいは比較的短いサイクルで修正が入り、実際のページに反映されていくことがあります。</p>
+<p>つまり、社内計画がこうだから、外から何を言われても変わらないという姿勢ではなく、それが妥当かどうか、どれだけ多くのお客様に影響するか、どの程度のリスクとコストで改善できるかを、毎回きちんと会話したうえで判断しています。<br>Azure の OSS マネージドサービスのサポートは、単にトラブル対応をするだけではなく、日々のケースを通じてプロダクトチーム（開発チームやプロダクトマネージャー）と密にやり取りしています。サポートから単に「お客様がこう言っています」と投げるだけではなく、なぜその背景でそういう要望になっているのか、既存機能や構成とのトレードオフはどこにあるのかに加えて内部情報といった文脈を添えて社内で議論できるのが、サポートの役割です。<br>もちろん、すべてのフィードバックがすぐに製品の仕様変更や新機能として反映されるわけではありません。優先順位や技術的制約、セキュリティ上の理由など、さまざまな観点から検討が行われます。<br>それでも、中長期的に見たときに、お客様の声が仕様検討の議論の土台になることは間違いありません。<br>サポートとしても、単なる問い合わせ窓口で終わるのではなく、お客様 ↔ プロダクト の間をつなぐ橋渡し役として、できるだけ多くの生の声を聞きたいと考えています。</p>
+<h2 id="一緒にサービスを育てていくために、お願いしたいこと"><a href="#一緒にサービスを育てていくために、お願いしたいこと" class="headerlink" title="一緒にサービスを育てていくために、お願いしたいこと"></a>一緒にサービスを育てていくために、お願いしたいこと</h2><p>ここまでの話を少しだけ整理すると、一緒に製品をより良くしていくうえで、スムーズになる情報は次のようなものです。<br>まず、ドキュメントに関しては、どのページのどの部分が分かりにくかったのか、具体的な URLと箇所を教えていただけると、ドキュメント改訂の議論にスムーズにつなげやすくなります。英語版と日本語版で意味がずれているように見えた場合は、その比較も重要な材料になります。</p>
+<p>次に、機能や仕様に関するご要望に加え、その背後にある業務フローやアーキテクチャ、ビジネス上の制約を共有いただけると、プロダクトチームにとっても判断しやすくなります。<br>お客様の現場の声やその背景の中には、クラウド側の機能として提供すべきかどうかを考えるうえで、重要な情報がある場合があります。<br>製品としてどうしても得意ではないことや、設計思想としてあえて対応していないことが存在するのも事実です。<br>そのような場面では、正直に「現時点では難しい」というお話をさせていただくこともありますが、そのときにも、「なぜその設計になっているのか」「どこまでであればワークアラウンドで寄せられそうか」「今後の方向性として、どういう観点を社内に伝えていくべきか」といった部分は、形式的なやりとりではなく、担当するお客様と会話しながら進めていきます。</p>
+<h2 id="おわりに：問い合わせのその先へ"><a href="#おわりに：問い合わせのその先へ" class="headerlink" title="おわりに：問い合わせのその先へ"></a>おわりに：問い合わせのその先へ</h2><p>サポートに問い合わせるとき、多くの場合は「いま目の前で困っていることを解決したい」というのが第一の目的だと思います。<br>私たちサポートも、まずは目の前の問題を解決することを最優先に考えています。<br>ただ、その少し先に、「このサービスがもっとこうなったら良いのに」「このドキュメントがこう書き換わったら、自分以外のユーザーも助かるのに」という長期的な観点でもサポートすることが可能です。<br>この世に存在するプロダクトは、実際に使い込んでくださっているお客様の視点が加わって、はじめて現実的で、現場に根ざしたものになっていきます。<br>そして、その進化を弊チームが扱う製品(Azure Database for PostgreSQL / MySQL flexible server)に当てはめると、提供する側と利用するユーザーという一方的な関係ではなく、1 件 1 件のケースで人と人が向き合うことから始まると考えています。<br>今後も、お気軽にご相談、実際の声を聞かせていただければ幸いです。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+        
+        <a href="https://github.com/jp-ossdb/blog/edit/main/articles/oss/product-management.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../capacity/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">柔軟なスケールをクラウドで実現するために、キャパシティ / クォータ / リージョン制限の整理する</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">プロダクトを一緒に育てるために、Azure OSSサポートの使い方</a>
+          </li>
+        
+          <li>
+            <a href="../capacity/">柔軟なスケールをクラウドで実現するために、キャパシティ / クォータ / リージョン制限の整理する</a>
+          </li>
+        
+          <li>
+            <a href="../burstable/">バースト可能コンピュートは、どの用途で利用するべきか？</a>
+          </li>
+        
+          <li>
+            <a href="../supportboundary/">Azure OSS PaaS サービスのサポート範囲について（PostgreSQL, MySQL, Citus） </a>
+          </li>
+        
+          <li>
+            <a href="../../postgres-flexible/azure-database-for-postgresql-flexibleserver-planned-maintenance/">Azure Database for PostgreSQL フレキシブルサーバー の メンテナンスについて</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/PostgreSQL/" rel="tag">PostgreSQL</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/PostgreSQL/">PostgreSQL</a><span class="tag-list-count">2</span><ul></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2026/01/">2026 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/12/">2022 / 12</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2026 Azure PaaS OSS Database Support Japan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
